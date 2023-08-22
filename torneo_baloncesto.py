@@ -1,35 +1,47 @@
-list_puntos = []
-list_jugadores = []
-list_dorsalJugadores = []
+listPuntos = []
+listJugadores = []
+listDorsalJugadores = []
 sw = True
 import os
 
-def fnt_limpiar():
+def fntLimpiar():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('Autor: Yeison Cordoba')
     print('Torneo baloncesto')
-    print('Jugadores: ',list_jugadores, '\n')
+    print('Jugadores: ',listJugadores, '\n')
 
-def fnt_registrarJugadores(numero,nombre):
+def fntRegistrarJugadores(numero,nombre):
     if numero == '' or nombre == '':
         enter = input('Debe ingresar todos los datos <ENTER>...')
     else:
-        list_jugadores.append(nombre)
-        list_dorsalJugadores.append(numero)
-        list_puntos.append(0)
+        listJugadores.append(nombre)
+        listDorsalJugadores.append(numero)
+        listPuntos.append(0)
         enter = input('Jugador almacenado con éxito <ENTER>...')
 
-def fnt_estadistica():
-        fnt_limpiar()
+def fntRegistrarPuntos(nombre,numero,puntos):
+    if nombre != '' and numero != '':
+        for i in range(0,len(listJugadores)):
+            if listJugadores[i] == nombre and listDorsalJugadores[i] == numero:
+                listPuntos[i] += puntos
+                enter = input('Puntos almacenados con éxito <ENTER>...')
+                break
+        else:
+            enter = input('Jugador no registrado <ENTER>...')
+    else:
+        enter = input('Debe ingresar todos los datos <ENTER>...')
+
+def fntEstadistica():
+        fntLimpiar()
         print('<<<< ESTADISTICA >>>>')
         print('Jugador     - Número     - Puntaje')
-        for i in range(0,len(list_jugadores)):
-            print(list_jugadores[i],'       ',list_dorsalJugadores[i],'             ',list_puntos[i])
+        for i in range(0,len(listJugadores)):
+            print(listJugadores[i],'       ',listDorsalJugadores[i],'             ',listPuntos[i])
         enter = input('Fin de estadistica <ENTER>...')
 
-def fnt_menu(inic):
+def fntMenu(inic):
     while (inic == True):
-        fnt_limpiar()
+        fntLimpiar()
         print('1. Registrar jugadores')
         print('2. Registrar puntos')
         print('3. Estadisticas')
@@ -39,13 +51,20 @@ def fnt_menu(inic):
         if opcion == 1:
             nm = input('Ingrese el nombre del jugador: ')
             nu = input('Ingrese el número del jugador: ')
-            fnt_registrarJugadores(nu,nm)
+            fntRegistrarJugadores(nu,nm)
 
         elif opcion == 2:
-            jugar()
+            nm = input('Ingrese el nombre del jugador: ')
+            nu = input('Ingrese el número del jugador: ')
+            pt = input('Ingrese los puntos: ')
+            if pt == '':
+                enter = input('Debe ingresar todos los datos <ENTER>...')
+            else:
+                pt = int(pt.strip())
+                fntRegistrarPuntos(nm,nu,pt)
 
         elif opcion == 3:
-            fnt_estadistica()    
+            fntEstadistica()    
 
         elif opcion == 4:
             inic = False
@@ -53,4 +72,4 @@ def fnt_menu(inic):
         else:
             enter = input('Opcion no valida <ENTER>...')
 
-fnt_menu(True)
+fntMenu(True)
