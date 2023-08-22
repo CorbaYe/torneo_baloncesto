@@ -45,9 +45,12 @@ def fnt_menu(inic):
             jugar()
 
         elif opcion == 3:
-            fnt_estadistica()
+            fnt_estadistica()    
+
+        elif opcion == 4:
+            inic = False
 
         else:
-            print('Opcion no valida')
+            enter = input('Opcion no valida <ENTER>...')
 
 fnt_menu(True)
