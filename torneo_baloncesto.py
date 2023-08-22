@@ -12,12 +12,20 @@ def fnt_limpiar():
 
 def fnt_registrarJugadores(numero,nombre):
     if numero == '' or nombre == '':
-        enter = input('Debe ingresar todos los datos <ENTER>')
+        enter = input('Debe ingresar todos los datos <ENTER>...')
     else:
         list_jugadores.append(nombre)
         list_dorsalJugadores.append(numero)
         list_puntos.append(0)
-        enter = input('Jugador almacenado con éxito <ENTER>')
+        enter = input('Jugador almacenado con éxito <ENTER>...')
+
+def fnt_estadistica():
+        fnt_limpiar()
+        print('<<<< ESTADISTICA >>>>')
+        print('Jugador     - Número     - Puntaje')
+        for i in range(0,len(list_jugadores)):
+            print(list_jugadores[i],'       ',list_dorsalJugadores[i],'             ',list_puntos[i])
+        enter = input('Fin de estadistica <ENTER>...')
 
 def fnt_menu(inic):
     while (inic == True):
@@ -35,11 +43,10 @@ def fnt_menu(inic):
 
         elif opcion == 2:
             jugar()
+
         elif opcion == 3:
-            print('<<<< ESTADISTICA >>>>')
-            print('Jugador     - Número     - Puntaje')
-            for i in range(0,len(list_jugadores)):
-                print(list_jugadores[i],'       ',list_dorsalJugadores[i],'       ',list_puntos[i])
+            fnt_estadistica()
+
         else:
             print('Opcion no valida')
 
